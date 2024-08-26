@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Ventas</title>
+</head>
+<body>
+    <h1>Ventas Registradas</h1>
+    <ul id="sales-list">
+        <!-- Lista de ventas cargada por JavaScript -->
+    </ul>
+    <a href="/">Volver al inicio</a>
+    <script>
+        fetch('/list_sales')
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById('sales-list');
+                data.forEach(sale => {
+                    const item = document.createElement('li');
+                    item.textContent = `ID: ${sale.id}, Fecha: ${sale.fecha}, Total: ${sale.total}, Cliente: ${sale.cliente}`;
+                    list.appendChild(item);
+                });
+            });
+    </script>
+</body>
+</html>
